@@ -29,34 +29,15 @@ public class LocalSyncProvider implements SyncProvider {
 
     void storeMedicineDetails(DataProvider dataProvider) {
         dataProvider.medicineDetailsDao().deleteAll();
-        //Create the list
-        List<MedicineDetails> medicineDetails = fromFile();
-    }
-
-    List<MedicineDetails> fromFile() {
-        InputStream inputStream = null;
-        List<MedicineDetails> result = new ArrayList<>();
         Gson gson = new GsonBuilder()
 
                 .registerTypeAdapter(Date.class, new DateSerializer())
                 .setLenient()
                 .create();
-        Object o =  gson.fromJson(new InputStreamReader(context.getResources().openRawResource(R.raw.medicinedetails)), MedicineDetails[].class);
-       if (o == null) {
-
-       }
-        return result;
-    }
-
-    MedicineDetails createFromLine(String text) {
-        MedicineDetails result = null;
-        if (text != null) {
-            String[] fields = text.split("£");
-            if (fields.length == 11) {
-
-            }
-
+        MedicineDetails[] medicineDetails =  gson.fromJson(new InputStreamReader(context.getResources().openRawResource(R.raw.medicinedetails)), MedicineDetails[].class);
+        if (medicineDetails != null) {
+            dataProvider.medicineDetailsDao().insertAll(medicineDetails);
         }
-        return result;
     }
+
 }

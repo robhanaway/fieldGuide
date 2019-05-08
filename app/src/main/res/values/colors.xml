@@ -3,4 +3,8 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="colorMedicine">#2196F3</color>
+    <color name="medicineNameColor">#673AB7</color>
+    <color name="medicineTextColor">#000000</color>
+    <color name="seperator">#400000FF</color>
 </resources>

@@ -14,7 +14,21 @@ public abstract class BaseActivity extends AppCompatActivity {
         logging = getApp().getLogging();
     }
 
-    protected FieldGuideApplication getApp() {
+    public FieldGuideApplication getApp() {
         return (FieldGuideApplication) getApplication();
+    }
+
+    public Logging getLogging() {
+        return logging;
+    }
+
+    public void setActionBarTitle(int resId) {
+        setActionBarTitle(getString(resId));
+    }
+
+    public void setActionBarTitle(String text) {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(text);
+        }
     }
 }

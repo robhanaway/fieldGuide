@@ -8,4 +8,29 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="medicineNameStyle" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/medicineNameColor</item>
+        <item name="android:typeface">normal</item>
+    </style>
+
+        <style name="indicationStyle" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/medicineNameColor</item>
+        <item name="android:typeface">normal</item>
+    </style>
+
+
+    <style name="MedicineInfoCategory" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/medicineNameColor</item>
+        <item name="android:typeface">normal</item>
+    </style>
+
+    <style name="MedicineInfoText" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/medicineTextColor</item>
+        <item name="android:typeface">normal</item>
+    </style>
 </resources>

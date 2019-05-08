@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">FieldGuide</string>
     <string name="title_home">Home</string>
+    <string name="title_medicine">Medicine</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_indications">Indications</string>
+    <string name="title_adult_dose">Adult Dose</string>
+    <string name="title_child_dose">Child Dose</string>
+    <string name="title_contra">Contraindications</string>
+    <string name="title_side_effects">Side effects</string>
+    <string name="title_additional">Additional Information</string>
 </resources>

@@ -3,16 +3,22 @@ package com.rh.fieldguide.activities;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
+
+
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.view.View;
 
 import com.rh.fieldguide.R;
+import com.rh.fieldguide.fragments.BaseFragment;
+import com.rh.fieldguide.fragments.MedicineFragment;
 
 public class MainActivity extends BaseActivity {
 
-    private TextView mTextMessage;
-
+    BaseFragment currentFragment;
+    View container;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -20,27 +26,54 @@ public class MainActivity extends BaseActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                    loadMedicine();
                     return true;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+
                     return true;
             }
+
+
             return false;
         }
     };
+
+
+    void loadMedicine() {
+        loadFragment(new MedicineFragment());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        container = findViewById(R.id.fragment_container);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        loadMedicine();
+
+
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setActionBarTitle(R.string.app_name);
+    }
+
+    void loadFragment(BaseFragment fragment) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.addToBackStack(null).commit();
+        currentFragment = fragment;
+    }
+
+    @Override
+    public void onBackPressed() {
+    }
 }

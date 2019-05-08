@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <RelativeLayout
+                android:id="@+id/container_indications"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/image_indicator"
+                    android:src="@drawable/ic_remove_red_eye_black_24dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/title_indications"
+                    android:layout_toEndOf="@+id/image_indicator"
+                    android:text="@string/title_indications"
+                    android:textAppearance="@style/MedicineInfoCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_toEndOf="@+id/image_indicator"
+                    android:layout_below="@+id/title_indications"
+                    android:id="@+id/indications"
+                    android:textAppearance="@style/MedicineInfoText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+        <View
+            android:layout_marginTop="10sp"
+            android:layout_marginBottom="10sp"
+            android:layout_height="1sp"
+            android:layout_width="match_parent"
+            android:background="@color/seperator" />
+
+            <RelativeLayout
+                android:id="@+id/container_adult_dose"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/image_adult_dose"
+                    android:src="@drawable/ic_face_black_24dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/title_adult_dose"
+                    android:layout_toEndOf="@+id/image_adult_dose"
+                    android:text="@string/title_adult_dose"
+                    android:textAppearance="@style/MedicineInfoCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_toEndOf="@+id/image_adult_dose"
+                    android:layout_below="@+id/title_adult_dose"
+                    android:id="@+id/adult_dose"
+                    android:textAppearance="@style/MedicineInfoText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+            <View
+                android:layout_marginTop="10sp"
+                android:layout_marginBottom="10sp"
+                android:layout_height="1sp"
+                android:layout_width="match_parent"
+                android:background="@color/seperator" />
+
+
+            <RelativeLayout
+                android:id="@+id/container_child_dose"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/image_child_dose"
+                    android:src="@drawable/ic_child_care_black_24dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/title_child_dose"
+                    android:layout_toEndOf="@+id/image_child_dose"
+                    android:text="@string/title_child_dose"
+                    android:textAppearance="@style/MedicineInfoCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_toEndOf="@+id/image_child_dose"
+                    android:layout_below="@+id/title_child_dose"
+                    android:id="@+id/child_dose"
+                    android:textAppearance="@style/MedicineInfoText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+            <View
+                android:layout_marginTop="10sp"
+                android:layout_marginBottom="10sp"
+                android:layout_height="1sp"
+                android:layout_width="match_parent"
+                android:background="@color/seperator" />
+
+
+            <RelativeLayout
+                android:id="@+id/container_contra"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/image_contra"
+                    android:src="@drawable/ic_warning_black_24dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/title_contra"
+                    android:layout_toEndOf="@+id/image_contra"
+                    android:text="@string/title_contra"
+                    android:textAppearance="@style/MedicineInfoCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_toEndOf="@+id/image_contra"
+                    android:layout_below="@+id/title_contra"
+                    android:id="@+id/contra"
+                    android:textAppearance="@style/MedicineInfoText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+            <View
+                android:layout_marginTop="10sp"
+                android:layout_marginBottom="10sp"
+                android:layout_height="1sp"
+                android:layout_width="match_parent"
+                android:background="@color/seperator" />
+
+
+            <RelativeLayout
+                android:id="@+id/container_side_effects"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/image_side_effects"
+                    android:src="@drawable/ic_not_interested_black_24dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/title_side_effects"
+                    android:layout_toEndOf="@+id/image_side_effects"
+                    android:text="@string/title_side_effects"
+                    android:textAppearance="@style/MedicineInfoCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_toEndOf="@+id/image_side_effects"
+                    android:layout_below="@+id/title_side_effects"
+                    android:id="@+id/side_effects"
+                    android:textAppearance="@style/MedicineInfoText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+            <View
+                android:layout_marginTop="10sp"
+                android:layout_marginBottom="10sp"
+                android:layout_height="1sp"
+                android:layout_width="match_parent"
+                android:background="@color/seperator" />
+            <RelativeLayout
+                android:id="@+id/container_additional"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/image_additional"
+                    android:src="@drawable/ic_info_outline_black_24dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/title_additional"
+                    android:layout_toEndOf="@+id/image_additional"
+                    android:text="@string/title_additional"
+                    android:textAppearance="@style/MedicineInfoCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_toEndOf="@+id/image_additional"
+                    android:layout_below="@+id/title_additional"
+                    android:id="@+id/additional"
+                    android:textAppearance="@style/MedicineInfoText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
