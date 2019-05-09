@@ -7,4 +7,5 @@
     <color name="medicineNameColor">#673AB7</color>
     <color name="medicineTextColor">#000000</color>
     <color name="seperator">#400000FF</color>
+    <color name="home_buttons">#400000FF</color>
 </resources>

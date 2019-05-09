@@ -11,4 +11,9 @@
     <string name="title_contra">Contraindications</string>
     <string name="title_side_effects">Side effects</string>
     <string name="title_additional">Additional Information</string>
+    <string name="title_assessment">Assessment</string>
+    <string name="title_paediatric">Paediatric</string>
+    <string name="title_major_accident">Major Emergency</string>
+    <string name="title_miscellaneous">Miscellaneous</string>
+    <string name="title_hospitals">Hospital Numbers</string>
 </resources>

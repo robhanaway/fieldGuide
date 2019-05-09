@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:weightSum="6"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/assessment"
+        style="@style/HomeButton"
+        android:drawableStart="@drawable/assessment"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:text="@string/title_assessment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+    <Button
+
+        style="@style/HomeButton"
+        android:id="@+id/paediatric"
+        android:drawableStart="@drawable/paediatric"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:text="@string/title_paediatric"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+    <Button
+
+        style="@style/HomeButton"
+        android:id="@+id/majoraccident"
+        android:drawableStart="@drawable/major_accident"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:text="@string/title_major_accident"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+    <Button
+
+        style="@style/HomeButton"
+        android:id="@+id/miscellaneous"
+        android:drawableStart="@drawable/miscellaneous"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:text="@string/title_miscellaneous"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+    <Button
+
+        style="@style/HomeButton"
+        android:id="@+id/medications"
+        android:drawableStart="@drawable/medications"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:text="@string/title_medicine"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+    <Button
+
+        style="@style/HomeButton"
+        android:id="@+id/hospitals"
+        android:drawableStart="@drawable/hospitals"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:text="@string/title_hospitals"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+</LinearLayout>

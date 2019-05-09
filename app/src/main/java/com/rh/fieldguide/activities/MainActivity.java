@@ -13,6 +13,7 @@ import android.view.View;
 
 import com.rh.fieldguide.R;
 import com.rh.fieldguide.fragments.BaseFragment;
+import com.rh.fieldguide.fragments.HomeFragment;
 import com.rh.fieldguide.fragments.MedicineFragment;
 
 public class MainActivity extends BaseActivity {
@@ -27,7 +28,7 @@ public class MainActivity extends BaseActivity {
             switch (item.getItemId()) {
 
                 case R.id.navigation_home:
-
+                    loadHome();
                     return true;
                 case R.id.navigation_medicication:
                     loadMedicine();
@@ -53,7 +54,8 @@ public class MainActivity extends BaseActivity {
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        loadHome();
+        navigation.setSelectedItemId(R.id.navigation_home);
+//        loadHome();
 //        loadMedicine();
 
     }
@@ -72,7 +74,7 @@ public class MainActivity extends BaseActivity {
     }
 
     void loadHome() {
-
+        loadFragment(new HomeFragment());
     }
 
     void loadFragment(BaseFragment fragment) {

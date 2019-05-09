@@ -18,6 +18,7 @@ import com.rh.fieldguide.data.DataProvider;
 import com.rh.fieldguide.data.primitives.MedicineDetails;
 
 public class MedicineFragment extends BaseFragment implements MedicineAdapter.OnItemClickListener{
+    final static String TAG = MedicineFragment.class.getSimpleName();
     RecyclerView recyclerView;
     MedicineAdapter medicineAdapter;
     @Override
@@ -36,9 +37,7 @@ public class MedicineFragment extends BaseFragment implements MedicineAdapter.On
         medicineAdapter = new MedicineAdapter(getParent(), DataProvider.getDB(getApp()).medicineDetailsDao().getAll(), this);
 
         recyclerView.setAdapter(medicineAdapter);
-
-
-
+        logging.d(TAG, "load");
     }
 
 
