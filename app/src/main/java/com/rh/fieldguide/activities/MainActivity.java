@@ -25,13 +25,14 @@ public class MainActivity extends BaseActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
+
                 case R.id.navigation_home:
-                    loadMedicine();
-                    return true;
-                case R.id.navigation_dashboard:
 
                     return true;
-                case R.id.navigation_notifications:
+                case R.id.navigation_medicication:
+                    loadMedicine();
+                    return true;
+                case R.id.navigation_settings:
 
                     return true;
             }
@@ -42,9 +43,7 @@ public class MainActivity extends BaseActivity {
     };
 
 
-    void loadMedicine() {
-        loadFragment(new MedicineFragment());
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,15 +53,26 @@ public class MainActivity extends BaseActivity {
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        loadMedicine();
-
+        loadHome();
+//        loadMedicine();
 
     }
+
+
+
 
     @Override
     protected void onResume() {
         super.onResume();
         setActionBarTitle(R.string.app_name);
+    }
+
+    void loadMedicine() {
+        loadFragment(new MedicineFragment());
+    }
+
+    void loadHome() {
+
     }
 
     void loadFragment(BaseFragment fragment) {
@@ -75,5 +85,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
     }
 }
