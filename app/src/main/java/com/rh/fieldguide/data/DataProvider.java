@@ -6,14 +6,16 @@ import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
+import com.rh.fieldguide.data.primitives.Hospital;
 import com.rh.fieldguide.data.primitives.MedicineDetails;
 
 
-@Database(entities = {MedicineDetails.class}, version = 1)
+@Database(entities = {MedicineDetails.class, Hospital.class}, version = 2)
 @TypeConverters({DateTypeConverter.class})
 public abstract class DataProvider extends RoomDatabase {
     private static DataProvider instance;
     public abstract MedicineDetailsDao medicineDetailsDao();
+    public abstract HospitalsDao hospitalsDao();
 
     public static DataProvider getDB(Context context) {
         if (instance == null) {

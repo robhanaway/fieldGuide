@@ -16,4 +16,6 @@
     <string name="title_major_accident">Major Emergency</string>
     <string name="title_miscellaneous">Miscellaneous</string>
     <string name="title_hospitals">Hospital Numbers</string>
+    <string name="main_phone">Main</string>
+    <string name="er_phone">Emergency</string>
 </resources>

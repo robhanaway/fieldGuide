@@ -8,16 +8,18 @@ import android.view.MenuItem;
 
 import com.rh.fieldguide.FieldGuideApplication;
 import com.rh.fieldguide.R;
+import com.rh.fieldguide.data.DataProvider;
 import com.rh.fieldguide.utils.logging.Logging;
 
 public abstract class BaseActivity extends AppCompatActivity {
+    public final static String EXTRA_ID = "id";
     protected Logging logging;
-
+    protected DataProvider dataProvider;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         logging = getApp().getLogging();
-
+        dataProvider = DataProvider.getDB(this);
     }
 
     public FieldGuideApplication getApp() {

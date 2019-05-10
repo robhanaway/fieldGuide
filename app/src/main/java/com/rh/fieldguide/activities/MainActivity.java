@@ -1,5 +1,6 @@
 package com.rh.fieldguide.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -16,7 +17,7 @@ import com.rh.fieldguide.fragments.BaseFragment;
 import com.rh.fieldguide.fragments.HomeFragment;
 import com.rh.fieldguide.fragments.MedicineFragment;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity{
 
     BaseFragment currentFragment;
     View container;
@@ -55,10 +56,10 @@ public class MainActivity extends BaseActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_home);
-//        loadHome();
-//        loadMedicine();
+
 
     }
+
 
 
 
@@ -89,4 +90,6 @@ public class MainActivity extends BaseActivity {
     public void onBackPressed() {
         super.onBackPressed();
     }
+
+
 }

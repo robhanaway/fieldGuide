@@ -14,7 +14,7 @@ import java.util.List;
 
 public class MedicineInfoActivity extends BaseActivity {
     final static String TAG = MedicineInfoActivity.class.getSimpleName();
-    public final static String EXTRA_ID = "id";
+
     MedicineDetails medicineDetails;
     ActionModeCallback actionModeCallback;
     ActionMode currentActionMode;

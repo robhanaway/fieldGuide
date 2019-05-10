@@ -1,0 +1,18 @@
+[
+    {
+        "_id": "1",
+        "county": "Armagh",
+        "name": "Craigavon Area Hospital​",
+        "main": "(048) 38334444​​",
+        "emergency": "(048) 38332006​.",
+        "code": "CAH"
+    },
+    {
+        "_id": "2",
+        "county": "Cavan",
+        "name": "Cavan General Hospital​​",
+        "main": "(049) 4376000​",
+        "emergency": "(049) 4376000​",
+        "code": "CGH"
+    }
+]

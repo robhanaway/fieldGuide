@@ -2,8 +2,11 @@ package com.rh.fieldguide;
 
 import android.app.Application;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.rh.fieldguide.data.DataProvider;
 import com.rh.fieldguide.data.LocalSyncProvider;
+import com.rh.fieldguide.data.csvExtract;
 import com.rh.fieldguide.utils.logging.LogToCat;
 import com.rh.fieldguide.utils.logging.Logging;
 
@@ -15,8 +18,9 @@ public class FieldGuideApplication extends Application {
         super.onCreate();
         createObjects();
         logging.d(TAG, "onCreate");
-        new LocalSyncProvider(this).sync(
-        DataProvider.getDB(this));
+//        new csvExtract().run(this);
+        sync();
+
     }
 
     void createObjects() {
@@ -25,5 +29,15 @@ public class FieldGuideApplication extends Application {
 
     public Logging getLogging() {
         return logging;
+    }
+
+    private void sync() {
+        new LocalSyncProvider(this).sync(DataProvider.getDB(this));
+    }
+
+    void fb() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("medicines");
+
     }
 }

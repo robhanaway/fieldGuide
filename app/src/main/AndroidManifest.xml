@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.rh.fieldguide">
 
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
     <application
         android:name=".FieldGuideApplication"
         android:allowBackup="true"
@@ -20,6 +21,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.MedicineInfoActivity"
+            android:theme="@style/AppTheme"
+            android:exported="false">
+
+        </activity>
+        <activity android:name=".activities.HospitalActivity"
+            android:theme="@style/AppTheme"
+            android:exported="false">
+
+        </activity>
+        <activity android:name=".activities.HospitalDetailActivity"
             android:theme="@style/AppTheme"
             android:exported="false">
 

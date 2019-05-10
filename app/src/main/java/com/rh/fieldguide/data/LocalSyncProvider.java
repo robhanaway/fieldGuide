@@ -5,6 +5,7 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.rh.fieldguide.R;
+import com.rh.fieldguide.data.primitives.Hospital;
 import com.rh.fieldguide.data.primitives.MedicineDetails;
 
 import java.io.BufferedReader;
@@ -25,12 +26,12 @@ public class LocalSyncProvider implements SyncProvider {
     @Override
     public void sync(DataProvider dataProvider) {
         storeMedicineDetails(dataProvider);
+        storeHospitals(dataProvider);
     }
 
     void storeMedicineDetails(DataProvider dataProvider) {
         dataProvider.medicineDetailsDao().deleteAll();
         Gson gson = new GsonBuilder()
-
                 .registerTypeAdapter(Date.class, new DateSerializer())
                 .setLenient()
                 .create();
@@ -40,4 +41,16 @@ public class LocalSyncProvider implements SyncProvider {
         }
     }
 
+    void storeHospitals(DataProvider dataProvider) {
+        dataProvider.hospitalsDao().deleteAll();
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Date.class, new DateSerializer())
+                .setLenient()
+                .create();
+
+        Hospital[] hospitals = gson.fromJson(new InputStreamReader(context.getResources().openRawResource(R.raw.hospitals)), Hospital[].class);
+        if (hospitals != null) {
+            dataProvider.hospitalsDao().insertAll(hospitals);
+        }
+    }
 }
