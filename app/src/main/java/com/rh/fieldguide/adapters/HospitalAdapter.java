@@ -66,6 +66,12 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalViewHolder> {
 
         hospitalViewHolder.name.setTextAppearance(context, hospitalBC instanceof HospitalHeader ?
                 R.style.HospitalHeaderStyle :  R.style.HospitalStyle);
+
+        if (hospitalBC instanceof Hospital) {
+            int shading  =i %2 == 0 ?  context.getResources().getColor(R.color.transparent):
+                    context.getResources().getColor(R.color.light_tint);
+            hospitalViewHolder.itemView.setBackgroundColor(shading);
+        }
         hospitalViewHolder.bind(hospitalBC, onItemClickListener);
     }
 

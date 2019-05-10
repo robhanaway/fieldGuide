@@ -37,6 +37,7 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineViewHolder> {
         MedicineViewHolder medicineViewHolder = new MedicineViewHolder(view);
         medicineViewHolder.name = view.findViewById(R.id.name);
         medicineViewHolder.indications = view.findViewById(R.id.indications);
+
         return medicineViewHolder;
     }
 
@@ -44,7 +45,9 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineViewHolder> {
     public void onBindViewHolder(@NonNull MedicineViewHolder medicineViewHolder, int i) {
         MedicineDetails details = medicineDetails.get(i);
         medicineViewHolder.bind(details, onItemClickListener);
-
+        int shading  =i %2 == 0 ?  context.getResources().getColor(R.color.transparent):
+                context.getResources().getColor(R.color.light_tint);
+        medicineViewHolder.itemView.setBackgroundColor(shading);
         medicineViewHolder.name.setText(details.getMedicinename());
         medicineViewHolder.indications.setText(details.getIndications());
     }

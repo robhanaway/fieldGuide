@@ -66,7 +66,7 @@ public class HospitalDetailActivity extends BaseActivity implements View.OnClick
         String number = v instanceof TextView ? TextView.class.cast(v).getText().toString() : null;
         if (number != null) {
             Intent callIntent = new Intent(Intent.ACTION_CALL);
-            callIntent.setData(Uri.parse(number));
+            callIntent.setData(Uri.parse(number.replace("(","").replace(")","").replace(" ","")));
             callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             try {
                 startActivity(callIntent);

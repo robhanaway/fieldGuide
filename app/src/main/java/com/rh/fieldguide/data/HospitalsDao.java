@@ -17,7 +17,7 @@ public interface HospitalsDao {
     @Query("DELETE from hospitals")
     void deleteAll();
 
-    @Query("SELECT * FROM hospitals ORDER by county ASC")
+    @Query("SELECT * FROM hospitals ORDER by county, name ASC")
     List<Hospital> getAll();
 
     @Query("SELECT * FROM hospitals WHERE _id = :id")

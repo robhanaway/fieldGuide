@@ -5,6 +5,7 @@ import android.app.Application;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.rh.fieldguide.data.DataProvider;
+import com.rh.fieldguide.data.FirebaseSyncProvider;
 import com.rh.fieldguide.data.LocalSyncProvider;
 import com.rh.fieldguide.data.csvExtract;
 import com.rh.fieldguide.utils.logging.LogToCat;
@@ -32,8 +33,10 @@ public class FieldGuideApplication extends Application {
     }
 
     private void sync() {
-        new LocalSyncProvider(this).sync(DataProvider.getDB(this));
+//        new LocalSyncProvider(this).sync(DataProvider.getDB(this));
+        new FirebaseSyncProvider().sync(DataProvider.getDB(this));
     }
+
 
     void fb() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
