@@ -6,6 +6,8 @@ import android.arch.persistence.room.Query;
 
 import com.rh.fieldguide.data.primitives.Dosage;
 
+import java.util.List;
+
 
 @Dao
 public interface DosageDao {
@@ -14,4 +16,7 @@ public interface DosageDao {
 
         @Query("DELETE from dosage")
         void deleteAll();
+
+        @Query("SELECT * from dosage WHERE medicineid = :medicineid")
+        List<Dosage> getByMedicineId(int medicineid);
 }

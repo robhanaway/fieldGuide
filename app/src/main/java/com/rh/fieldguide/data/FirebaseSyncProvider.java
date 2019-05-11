@@ -7,6 +7,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.rh.fieldguide.data.primitives.Calculation;
 import com.rh.fieldguide.data.primitives.Dosage;
 import com.rh.fieldguide.data.primitives.Hospital;
 import com.rh.fieldguide.data.primitives.MedicineDetails;
@@ -20,13 +21,35 @@ public class FirebaseSyncProvider implements SyncProvider {
     ValueEventListener medicineEventListener;
     ValueEventListener hospitalEventListener;
     ValueEventListener dosageListener;
+    ValueEventListener calculationListener;
     @Override
     public void sync(DataProvider dataProvider) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         medicine(dataProvider, firebaseDatabase);
         hospitals(dataProvider,firebaseDatabase);
         dosages(dataProvider,firebaseDatabase);
+        calculation(dataProvider,firebaseDatabase);
     }
+
+    void calculation(final DataProvider dataProvider, FirebaseDatabase firebaseDatabase) {
+        dataProvider.calculationDao().deleteAll();
+        final DatabaseReference reference = firebaseDatabase.getReference("calculation");
+        calculationListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dataSnapshot.getRef().removeEventListener(calculationListener);
+                storeCalculation(dataSnapshot, dataProvider);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+        reference.addValueEventListener(calculationListener);
+    }
+
+
 
     void medicine(final DataProvider dataProvider, FirebaseDatabase firebaseDatabase) {
         dataProvider.medicineDetailsDao().deleteAll();
@@ -242,5 +265,62 @@ public class FirebaseSyncProvider implements SyncProvider {
         }
         dataProvider.dosageDao().insertAll(dosages);
         System.out.println(count);
+    }
+
+    Calculation calculationFromSnapshot(DataSnapshot dataSnapshot) {
+        Calculation result = null;
+
+        try {
+            result = new Calculation();
+            for (DataSnapshot valueIterator : dataSnapshot.getChildren()) {
+                switch (valueIterator.getKey()) {
+                    case "_id":
+                        result.set_id(Integer.parseInt(valueIterator.getValue(String.class)));
+                        break;
+                    case "ct_calid":
+                        result.setCt_calid(Integer.parseInt(valueIterator.getValue(String.class)));
+                        break;
+                    case "ct_dosageid":
+                        result.setCt_dosageid(Integer.parseInt(valueIterator.getValue(String.class)));
+                        break;
+                    case "age":
+                        result.setAge(valueIterator.getValue(String.class));
+                        break;
+                    case "mg":
+                        result.setMg(valueIterator.getValue(String.class));
+                        break;
+                    case "weight":
+                        result.setWeight(valueIterator.getValue(String.class));
+                        break;
+                    case "ml":
+                        result.setMl(valueIterator.getValue(String.class));
+                        break;
+                    case "ct_modifieddate":
+                        result.setCt_modifieddate(formatter.parse(valueIterator.getValue(String.class)));
+                        break;
+                    case "ct_createdate":
+                        result.setCt_createdate(formatter.parse(valueIterator.getValue(String.class)));
+                        break;
+                }
+            }
+        } catch (Exception e) {
+            result = null;
+        }
+        return result;
+    }
+
+    void storeCalculation(DataSnapshot dataSnapshot, DataProvider dataProvider) {
+        dataProvider.calculationDao().deleteAll();
+        Calculation[] calculations = new Calculation[(int)dataSnapshot.getChildrenCount()];
+        int count = 0;
+
+
+        for (DataSnapshot child : dataSnapshot.getChildren()) {
+            calculations[count++] = calculationFromSnapshot(child);
+
+        }
+
+        System.out.println(count);
+        dataProvider.calculationDao().insertAll(calculations);
     }
 }
