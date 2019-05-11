@@ -7,20 +7,25 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.rh.fieldguide.data.primitives.Dosage;
 import com.rh.fieldguide.data.primitives.Hospital;
 import com.rh.fieldguide.data.primitives.MedicineDetails;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FirebaseSyncProvider implements SyncProvider {
     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     ValueEventListener medicineEventListener;
     ValueEventListener hospitalEventListener;
+    ValueEventListener dosageListener;
     @Override
     public void sync(DataProvider dataProvider) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         medicine(dataProvider, firebaseDatabase);
         hospitals(dataProvider,firebaseDatabase);
+        dosages(dataProvider,firebaseDatabase);
     }
 
     void medicine(final DataProvider dataProvider, FirebaseDatabase firebaseDatabase) {
@@ -168,6 +173,74 @@ public class FirebaseSyncProvider implements SyncProvider {
                 count++;
             }
         }
+        System.out.println(count);
+    }
+
+    void dosages(final DataProvider dataProvider, FirebaseDatabase firebaseDatabase) {
+        dataProvider.dosageDao().deleteAll();
+        final DatabaseReference reference = firebaseDatabase.getReference("dosage");
+        dosageListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
+                dataSnapshot.getRef().removeEventListener(dosageListener);
+                storeDosage(dataSnapshot,dataProvider);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+        reference.addValueEventListener(dosageListener);
+    }
+
+    Dosage dosageFromDataSnapshot(DataSnapshot dataSnapshot) {
+        Dosage result = null;
+
+        try {
+            result = new Dosage();
+            for (DataSnapshot valueIterator : dataSnapshot.getChildren()) {
+                switch (valueIterator.getKey()) {
+                    case "_id":
+                        result.set_id(Integer.parseInt(valueIterator.getValue(String.class)));
+                        break;
+                    case "dosageid":
+                        result.setDosageid(Integer.parseInt(valueIterator.getValue(String.class)));
+                        break;
+                    case "medicineid":
+                        result.setMedicineid(Integer.parseInt(valueIterator.getValue(String.class)));
+                        break;
+                    case "concentration":
+                        result.setConcentration(valueIterator.getValue(String.class));
+                        break;
+                    case "paediatricdose":
+                        result.setPaediatricdose(valueIterator.getValue(String.class));
+                        break;
+                    case "dosagecreatedate":
+                        result.setDosagecreatedate(formatter.parse(valueIterator.getValue(String.class)));
+                        break;
+                    case "dosagemodifieddate":
+                        result.setDosagemodifieddate(formatter.parse(valueIterator.getValue(String.class)));
+                        break;
+                }
+            }
+        } catch (Exception e) {
+            result = null;
+        }
+        return result;
+    }
+
+    void storeDosage(DataSnapshot dataSnapshot, DataProvider dataProvider) {
+        int count = 0;
+        Dosage[] dosages = new Dosage[(int)dataSnapshot.getChildrenCount()];
+
+        for (DataSnapshot child : dataSnapshot.getChildren()) {
+            dosages[count++] = dosageFromDataSnapshot(child);
+
+        }
+        dataProvider.dosageDao().insertAll(dosages);
         System.out.println(count);
     }
 }
