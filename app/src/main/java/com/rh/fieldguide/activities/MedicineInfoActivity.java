@@ -1,5 +1,6 @@
 package com.rh.fieldguide.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -54,6 +55,18 @@ public class MedicineInfoActivity extends BaseActivity {
         calculator = new Calculator(dataProvider, medicineDetails);
         calculation = findViewById(R.id.calculation);
         calculation.setVisibility(calculator.available() ? View.VISIBLE : View.GONE);
+
+        calculation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),
+                        calculator.getDosageCalculations().size() == 1 ?
+                                CalculatorActivity.class : DosageActivity.class);
+                intent.putExtra(EXTRA_ID, medicineDetails.get_id());
+                startActivity(intent);
+            }
+        });
+
         indecations = findViewById(R.id.indications);
         adultDose = findViewById(R.id.adult_dose);
         chidDose = findViewById(R.id.child_dose);

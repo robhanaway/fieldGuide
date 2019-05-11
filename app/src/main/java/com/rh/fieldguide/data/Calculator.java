@@ -11,7 +11,7 @@ public class Calculator {
     final DataProvider dataProvider;
     final MedicineDetails medicineDetails;
 
-    List<DosageCalculation> dosageCalculations;
+    private List<DosageCalculation> dosageCalculations;
     public Calculator(DataProvider dataProvider, MedicineDetails medicineDetails) {
         this.dataProvider = dataProvider;
         this.medicineDetails = medicineDetails;
@@ -35,5 +35,9 @@ public class Calculator {
 
     public boolean available() {
         return  dosageCalculations != null;
+    }
+
+    public List<DosageCalculation> getDosageCalculations() {
+        return dosageCalculations;
     }
 }
