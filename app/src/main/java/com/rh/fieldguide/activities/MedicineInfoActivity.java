@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.rh.fieldguide.R;
@@ -45,11 +46,14 @@ public class MedicineInfoActivity extends BaseActivity {
     TextView sideEffects;
     TextView additional;
 
+    View calculation;
     Calculator calculator;
     void populate() {
         logging.d(TAG, "populate");
         setActionBarTitle(medicineDetails.getMedicinename());
         calculator = new Calculator(dataProvider, medicineDetails);
+        calculation = findViewById(R.id.calculation);
+        calculation.setVisibility(calculator.available() ? View.VISIBLE : View.GONE);
         indecations = findViewById(R.id.indications);
         adultDose = findViewById(R.id.adult_dose);
         chidDose = findViewById(R.id.child_dose);
@@ -63,6 +67,7 @@ public class MedicineInfoActivity extends BaseActivity {
         contra.setText(medicineDetails.getContraindications());
         sideEffects.setText(medicineDetails.getSideeffects());
         additional.setText(medicineDetails.getAdditionalinformations());
+
 
 
     }

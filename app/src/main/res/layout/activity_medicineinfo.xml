@@ -88,22 +88,52 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <ImageView
-                    android:id="@+id/image_child_dose"
-                    android:src="@drawable/ic_child_care_black_24dp"
+                android:id="@+id/image_child_dose"
+                android:src="@drawable/ic_child_care_black_24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+                <RelativeLayout
+                    android:id="@+id/child_does_header"
+                    android:layout_toEndOf="@+id/image_child_dose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                <LinearLayout
+                    android:id="@+id/calculation"
+                    style="@style/HomeButton"
+                    android:padding="5dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="20dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/image_calculation"
+                        android:src="@drawable/ic_local_pharmacy_black_24dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:gravity="center_vertical"
+                        android:text="Calculate Dosage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+
                 <TextView
                     android:id="@+id/title_child_dose"
-                    android:layout_toEndOf="@+id/image_child_dose"
+
                     android:text="@string/title_child_dose"
                     android:textAppearance="@style/MedicineInfoCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-
+                </RelativeLayout>
                 <TextView
                     android:layout_toEndOf="@+id/image_child_dose"
-                    android:layout_below="@+id/title_child_dose"
+                    android:layout_below="@+id/child_does_header"
                     android:id="@+id/child_dose"
                     android:textAppearance="@style/MedicineInfoText"
                     android:layout_width="wrap_content"

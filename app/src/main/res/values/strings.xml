@@ -18,4 +18,5 @@
     <string name="title_hospitals">Hospital Numbers</string>
     <string name="main_phone">Main</string>
     <string name="er_phone">Emergency</string>
+    <string name="menu_settings">Settings</string>
 </resources>
