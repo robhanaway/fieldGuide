@@ -1,5 +1,7 @@
 package com.rh.fieldguide.data;
 
+import android.text.TextUtils;
+
 import com.rh.fieldguide.data.primitives.Calculation;
 import com.rh.fieldguide.data.primitives.Dosage;
 import com.rh.fieldguide.data.primitives.MedicineDetails;
@@ -39,5 +41,16 @@ public class Calculator {
 
     public List<DosageCalculation> getDosageCalculations() {
         return dosageCalculations;
+    }
+
+    public Calculation find(int dosageIndex,  String weight) {
+        if (!TextUtils.isEmpty(weight)) {
+            for (Calculation calculation : dosageCalculations.get(dosageIndex).getCalculations()) {
+                if (calculation.getWeight().equals(weight)) {
+                    return calculation;
+                }
+            }
+        }
+        return null;
     }
 }

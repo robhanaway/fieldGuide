@@ -1,5 +1,6 @@
 package com.rh.fieldguide.fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,12 @@ import com.rh.fieldguide.activities.HospitalActivity;
 
 public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
+    public interface OnItemSelectedListener {
+        void onHospitals();
+        void onMedications();
+    }
+
+    OnItemSelectedListener onItemSelectedListener;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -23,21 +30,25 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     void applyNavigation(View view) {
         view.findViewById(R.id.hospitals).setOnClickListener(this);
+        view.findViewById(R.id.medications).setOnClickListener(this);
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        onItemSelectedListener = (OnItemSelectedListener)context;
+    }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.hospitals:
-                launchHospitals();
+                onItemSelectedListener.onHospitals();
+                break;
+            case R.id.medications:
+                onItemSelectedListener.onMedications();
                 break;
         }
     }
 
-
-    void launchHospitals() {
-
-        getParent().startActivity(new Intent(getParent(), HospitalActivity.class));
-    }
 }

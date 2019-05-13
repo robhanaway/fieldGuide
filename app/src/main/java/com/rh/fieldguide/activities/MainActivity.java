@@ -18,10 +18,11 @@ import com.rh.fieldguide.fragments.BaseFragment;
 import com.rh.fieldguide.fragments.HomeFragment;
 import com.rh.fieldguide.fragments.MedicineFragment;
 
-public class MainActivity extends BaseActivity{
+public class MainActivity extends BaseActivity implements HomeFragment.OnItemSelectedListener{
 
     BaseFragment currentFragment;
     View container;
+    BottomNavigationView navigation;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -48,7 +49,7 @@ public class MainActivity extends BaseActivity{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-            getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -58,12 +59,9 @@ public class MainActivity extends BaseActivity{
         setContentView(R.layout.activity_main);
         container = findViewById(R.id.fragment_container);
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_home);
-
-
-
     }
 
 
@@ -98,4 +96,13 @@ public class MainActivity extends BaseActivity{
     }
 
 
+    @Override
+    public void onHospitals() {
+        startActivity(new Intent(this, HospitalActivity.class));
+    }
+
+    @Override
+    public void onMedications() {
+        navigation.setSelectedItemId(R.id.navigation_medicication);
+    }
 }
