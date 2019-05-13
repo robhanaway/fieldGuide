@@ -18,6 +18,8 @@ public class DosageActivity extends BaseActivity {
     ActionMode currentActionMode;
     MedicineDetails medicineDetails;
     Calculator calculator;
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dosage);

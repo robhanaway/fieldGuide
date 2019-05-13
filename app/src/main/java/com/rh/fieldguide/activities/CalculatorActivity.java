@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CalculatorActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
+    public final static String EXTRA_DOSAGE_INDEX = "dosageindex";
+
     ActionModeCallback actionModeCallback;
     ActionMode currentActionMode;
     MedicineDetails medicineDetails;
@@ -35,6 +37,7 @@ public class CalculatorActivity extends BaseActivity implements AdapterView.OnIt
         if (getIntent() != null) {
             int id = getIntent().getIntExtra(EXTRA_ID,-1);
             if (id != -1) {
+                dosageIndex = getIntent().getIntExtra(EXTRA_DOSAGE_INDEX,0);
                 List<MedicineDetails> list = DataProvider.getDB(getApp()).medicineDetailsDao().getById(id);
                 if (list != null && list.size() ==1) {
                     medicineDetails = list.get(0);

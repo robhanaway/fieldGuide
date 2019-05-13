@@ -1,5 +1,7 @@
 package com.rh.fieldguide.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ActionMode;
@@ -11,6 +13,8 @@ import android.widget.TextView;
 import com.rh.fieldguide.R;
 import com.rh.fieldguide.data.Calculator;
 import com.rh.fieldguide.data.DataProvider;
+import com.rh.fieldguide.data.DosageCalculation;
+import com.rh.fieldguide.data.primitives.Calculation;
 import com.rh.fieldguide.data.primitives.MedicineDetails;
 
 import java.util.List;
@@ -59,11 +63,7 @@ public class MedicineInfoActivity extends BaseActivity {
         calculation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),
-                        calculator.getDosageCalculations().size() == 1 ?
-                                CalculatorActivity.class : DosageActivity.class);
-                intent.putExtra(EXTRA_ID, medicineDetails.get_id());
-                startActivity(intent);
+                launchCalculation();
             }
         });
 
@@ -85,6 +85,40 @@ public class MedicineInfoActivity extends BaseActivity {
 
     }
 
+
+    void launchCalculation() {
+        if (calculator.getDosageCalculations().size() == 1 ) {
+            startCalculationIntent(medicineDetails.get_id(), 0);
+
+        } else {
+            showSelections();
+        }
+    }
+
+    void startCalculationIntent(int medicineId, int dosageIndex) {
+        Intent intent = new Intent(getApplicationContext(),CalculatorActivity.class) ;
+        intent.putExtra(EXTRA_ID, medicineId);
+        intent.putExtra(CalculatorActivity.EXTRA_DOSAGE_INDEX, dosageIndex);
+        startActivity(intent);
+    }
+
+    void showSelections() {
+
+        String[] routes = new String[calculator.getDosageCalculations().size()];
+        int index = 0;
+        for (DosageCalculation calculation : calculator.getDosageCalculations()) {
+            routes[index++] = calculation.getDosage().getPaediatricdose();
+        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select a Route");
+        builder.setItems(routes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startCalculationIntent(medicineDetails.get_id(), which);
+            }
+        });
+        builder.show();
+    }
 
     private class ActionModeCallback implements ActionMode.Callback {
         @Override

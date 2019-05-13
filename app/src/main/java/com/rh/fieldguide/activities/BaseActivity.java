@@ -2,12 +2,10 @@ package com.rh.fieldguide.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.ActionMode;
-import android.view.Menu;
-import android.view.MenuItem;
+
 
 import com.rh.fieldguide.FieldGuideApplication;
-import com.rh.fieldguide.R;
+
 import com.rh.fieldguide.data.DataProvider;
 import com.rh.fieldguide.utils.logging.Logging;
 
