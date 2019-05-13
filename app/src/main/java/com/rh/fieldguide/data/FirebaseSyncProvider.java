@@ -8,6 +8,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rh.fieldguide.data.primitives.Calculation;
+import com.rh.fieldguide.data.primitives.ClinicalAllLevel;
 import com.rh.fieldguide.data.primitives.Dosage;
 import com.rh.fieldguide.data.primitives.Hospital;
 import com.rh.fieldguide.data.primitives.MedicineClinic;
@@ -24,6 +25,7 @@ public class FirebaseSyncProvider implements SyncProvider {
     ValueEventListener dosageListener;
     ValueEventListener calculationListener;
     ValueEventListener medicineClinicListener;
+    ValueEventListener clinicAllLevelListener;
     @Override
     public void sync(DataProvider dataProvider) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -32,6 +34,7 @@ public class FirebaseSyncProvider implements SyncProvider {
         dosages(dataProvider,firebaseDatabase);
         calculation(dataProvider,firebaseDatabase);
         medicineClinic(dataProvider, firebaseDatabase);
+        clinicAllLevel(dataProvider, firebaseDatabase);
     }
 
     void calculation(final DataProvider dataProvider, FirebaseDatabase firebaseDatabase) {
@@ -52,6 +55,62 @@ public class FirebaseSyncProvider implements SyncProvider {
         reference.addValueEventListener(calculationListener);
     }
 
+
+    void clinicAllLevel(final DataProvider dataProvider, FirebaseDatabase firebaseDatabase) {
+        dataProvider.clinicalAllLevelDao().deleteAll();
+        final DatabaseReference reference = firebaseDatabase.getReference("clinicalalllevel");
+        clinicAllLevelListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dataSnapshot.getRef().removeEventListener(clinicAllLevelListener);
+                storeClinicAllLevel(dataSnapshot, dataProvider);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+        reference.addValueEventListener(clinicAllLevelListener);
+    }
+
+    void storeClinicAllLevel(DataSnapshot dataSnapshot, DataProvider dataProvider) {
+        int count = 0;
+        ClinicalAllLevel[] dosages = new ClinicalAllLevel[(int)dataSnapshot.getChildrenCount()];
+
+        for (DataSnapshot child : dataSnapshot.getChildren()) {
+            dosages[count++] = clinicalAllLevelFromSnapshot(child);
+
+        }
+        dataProvider.clinicalAllLevelDao().insertAll(dosages);
+        System.out.println(count);
+    }
+
+    ClinicalAllLevel clinicalAllLevelFromSnapshot(DataSnapshot dataSnapshot) {
+        ClinicalAllLevel result = null;
+
+        try {
+            result = new ClinicalAllLevel();
+            for (DataSnapshot valueIterator : dataSnapshot.getChildren()) {
+                switch (valueIterator.getKey()) {
+                    case "_id":
+                        result.set_id(Integer.parseInt(valueIterator.getValue(String.class)));
+                        break;
+                    case "levelid":
+                        result.setLevelid(Integer.parseInt(valueIterator.getValue(String.class)));
+                        break;
+                    case "clinicallevelname":
+                        result.setClinicallevelname(valueIterator.getValue(String.class));
+                        break;
+
+
+                }
+            }
+        } catch (Exception e) {
+            result = null;
+        }
+        return result;
+    }
 
     void medicineClinic(final DataProvider dataProvider, FirebaseDatabase firebaseDatabase) {
         dataProvider.medicineClinicDao().deleteAll();
@@ -198,8 +257,6 @@ public class FirebaseSyncProvider implements SyncProvider {
         hospitalEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-
                 dataSnapshot.getRef().removeEventListener(hospitalEventListener);
                 storeHospitals(dataSnapshot,dataProvider);
             }
@@ -249,6 +306,7 @@ public class FirebaseSyncProvider implements SyncProvider {
 
     void storeHospitals(DataSnapshot dataSnapshot, DataProvider dataProvider) {
         int count = 0;
+        Hospital[] hospitals = new Hospital[(int) dataSnapshot.getChildrenCount()];
         for (DataSnapshot child : dataSnapshot.getChildren()) {
             Hospital hospital = hospitalFromSnapshot(child);
             if (hospital != null) {

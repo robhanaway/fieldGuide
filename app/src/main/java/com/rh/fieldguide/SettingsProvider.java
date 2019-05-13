@@ -13,7 +13,7 @@ public class SettingsProvider {
     public int getClinicalLevel() {
         return Integer.valueOf(
          context.getSharedPreferences("settingsPreference", Context.MODE_PRIVATE)
-                .getString("clinicalLevel",""));
+                .getString("clinicalLevel","1"));
     }
 
     public void setClinicalLevel(int clinicalLevel) {
