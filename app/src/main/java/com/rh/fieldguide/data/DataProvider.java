@@ -9,10 +9,11 @@ import android.content.Context;
 import com.rh.fieldguide.data.primitives.Calculation;
 import com.rh.fieldguide.data.primitives.Dosage;
 import com.rh.fieldguide.data.primitives.Hospital;
+import com.rh.fieldguide.data.primitives.MedicineClinic;
 import com.rh.fieldguide.data.primitives.MedicineDetails;
 
 
-@Database(entities = {MedicineDetails.class, Hospital.class, Dosage.class, Calculation.class}, version = 5)
+@Database(entities = {MedicineDetails.class, Hospital.class, Dosage.class, Calculation.class, MedicineClinic.class}, version = 6)
 @TypeConverters({DateTypeConverter.class})
 public abstract class DataProvider extends RoomDatabase {
     private static DataProvider instance;
@@ -20,6 +21,7 @@ public abstract class DataProvider extends RoomDatabase {
     public abstract HospitalsDao hospitalsDao();
     public abstract DosageDao dosageDao();
     public abstract CalculationDao calculationDao();
+    public abstract MedicineClinicDao medicineClinicDao();
     public static DataProvider getDB(Context context) {
         if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(),

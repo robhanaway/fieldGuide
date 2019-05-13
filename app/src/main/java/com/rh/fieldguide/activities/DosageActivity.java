@@ -33,7 +33,7 @@ public class DosageActivity extends BaseActivity {
                 List<MedicineDetails> list = DataProvider.getDB(getApp()).medicineDetailsDao().getById(id);
                 if (list != null && list.size() ==1) {
                     medicineDetails = list.get(0);
-                    calculator = new Calculator(dataProvider, medicineDetails);
+                    calculator = new Calculator(getDataProvider(), medicineDetails);
                     populate();
                 }
             }

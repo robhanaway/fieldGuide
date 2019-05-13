@@ -10,6 +10,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.rh.fieldguide.data.primitives.Calculation;
 import com.rh.fieldguide.data.primitives.Dosage;
 import com.rh.fieldguide.data.primitives.Hospital;
+import com.rh.fieldguide.data.primitives.MedicineClinic;
 import com.rh.fieldguide.data.primitives.MedicineDetails;
 
 import java.text.SimpleDateFormat;
@@ -22,6 +23,7 @@ public class FirebaseSyncProvider implements SyncProvider {
     ValueEventListener hospitalEventListener;
     ValueEventListener dosageListener;
     ValueEventListener calculationListener;
+    ValueEventListener medicineClinicListener;
     @Override
     public void sync(DataProvider dataProvider) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -29,6 +31,7 @@ public class FirebaseSyncProvider implements SyncProvider {
         hospitals(dataProvider,firebaseDatabase);
         dosages(dataProvider,firebaseDatabase);
         calculation(dataProvider,firebaseDatabase);
+        medicineClinic(dataProvider, firebaseDatabase);
     }
 
     void calculation(final DataProvider dataProvider, FirebaseDatabase firebaseDatabase) {
@@ -50,6 +53,63 @@ public class FirebaseSyncProvider implements SyncProvider {
     }
 
 
+    void medicineClinic(final DataProvider dataProvider, FirebaseDatabase firebaseDatabase) {
+        dataProvider.medicineClinicDao().deleteAll();
+        final DatabaseReference reference = firebaseDatabase.getReference("medicineclinic");
+        medicineClinicListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dataSnapshot.getRef().removeEventListener(medicineClinicListener);
+                storeMedicineClinic(dataSnapshot, dataProvider);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+        reference.addValueEventListener(medicineClinicListener);
+    }
+
+    void storeMedicineClinic(DataSnapshot dataSnapshot, DataProvider dataProvider) {
+        int count = 0;
+        MedicineClinic[] dosages = new MedicineClinic[(int)dataSnapshot.getChildrenCount()];
+
+        for (DataSnapshot child : dataSnapshot.getChildren()) {
+            dosages[count++] = medicineClinicFromSnapshot(child);
+
+        }
+        dataProvider.medicineClinicDao().insertAll(dosages);
+        System.out.println(count);
+    }
+
+    MedicineClinic medicineClinicFromSnapshot(DataSnapshot dataSnapshot) {
+        MedicineClinic result = null;
+
+        try {
+            result = new MedicineClinic();
+            for (DataSnapshot valueIterator : dataSnapshot.getChildren()) {
+                switch (valueIterator.getKey()) {
+                    case "_id":
+                        result.set_id(Integer.parseInt(valueIterator.getValue(String.class)));
+                        break;
+                    case "clinicallevelid":
+                        result.setClinicallevelid(Integer.parseInt(valueIterator.getValue(String.class)));
+                        break;
+                    case "medclinid":
+                        result.setMedclinid(Integer.parseInt(valueIterator.getValue(String.class)));
+                        break;
+                    case "medicinedetailid":
+                        result.setMedicinedetailid(Integer.parseInt(valueIterator.getValue(String.class)));
+                        break;
+
+                }
+            }
+        } catch (Exception e) {
+            result = null;
+        }
+        return result;
+    }
 
     void medicine(final DataProvider dataProvider, FirebaseDatabase firebaseDatabase) {
         dataProvider.medicineDetailsDao().deleteAll();

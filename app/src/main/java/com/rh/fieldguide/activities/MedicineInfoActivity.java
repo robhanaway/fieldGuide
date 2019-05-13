@@ -14,7 +14,6 @@ import com.rh.fieldguide.R;
 import com.rh.fieldguide.data.Calculator;
 import com.rh.fieldguide.data.DataProvider;
 import com.rh.fieldguide.data.DosageCalculation;
-import com.rh.fieldguide.data.primitives.Calculation;
 import com.rh.fieldguide.data.primitives.MedicineDetails;
 
 import java.util.List;
@@ -56,7 +55,7 @@ public class MedicineInfoActivity extends BaseActivity {
     void populate() {
         logging.d(TAG, "populate");
         setActionBarTitle(medicineDetails.getMedicinename());
-        calculator = new Calculator(dataProvider, medicineDetails);
+        calculator = new Calculator(getDataProvider(), medicineDetails);
         calculation = findViewById(R.id.calculation);
         calculation.setVisibility(calculator.available() ? View.VISIBLE : View.GONE);
 

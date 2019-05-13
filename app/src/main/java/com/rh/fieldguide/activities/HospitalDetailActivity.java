@@ -4,7 +4,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
-import android.text.util.Linkify;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,7 +28,7 @@ public class HospitalDetailActivity extends BaseActivity implements View.OnClick
         if (getIntent() != null) {
             int id = getIntent().getIntExtra(EXTRA_ID,-1);
             if (id != -1) {
-                List<Hospital> list = dataProvider.hospitalsDao().getById(id);
+                List<Hospital> list = getDataProvider().hospitalsDao().getById(id);
                 if (list != null && list.size() ==1) {
                     hospital = list.get(0);
                     populate();

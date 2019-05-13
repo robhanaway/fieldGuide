@@ -18,7 +18,7 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineViewHolder> {
         void onItemClicked(MedicineDetails medicineDetails);
     }
     final Context context;
-    final List<MedicineDetails> medicineDetails;
+    List<MedicineDetails> medicineDetails;
     final LayoutInflater layoutInflater;
     final OnItemClickListener onItemClickListener;
     public MedicineAdapter(Context context, List<MedicineDetails> medicineDetails, OnItemClickListener onItemClickListener) {
@@ -26,6 +26,12 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineViewHolder> {
         this.medicineDetails = medicineDetails;
         layoutInflater = LayoutInflater.from(context);
         this.onItemClickListener = onItemClickListener;
+    }
+
+
+    public void setMedicineList(List<MedicineDetails> medicineDetails) {
+        this.medicineDetails = medicineDetails;
+        notifyDataSetChanged();
     }
 
     @NonNull

@@ -19,6 +19,9 @@ public interface MedicineDetailsDao {
     @Query("SELECT * FROM medicinedetails ORDER by medicinename ASC")
     List<MedicineDetails> getAll();
 
+    @Query("select * from medicinedetails where mdcid in (select distinct medicinedetailid from medicineclinic where clinicallevelid = :clinicalLevel)  ORDER by medicinename ASC")
+    List<MedicineDetails> getByClinicalLevel(int clinicalLevel);
+
     @Query("SELECT * FROM medicinedetails WHERE _id = :id")
     List<MedicineDetails> getById(int id);
 }

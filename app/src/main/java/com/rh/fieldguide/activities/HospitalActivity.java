@@ -32,7 +32,7 @@ public class HospitalActivity extends BaseActivity implements HospitalAdapter.On
     }
 
     void load() {
-        hospitalAdapter = new HospitalAdapter(this, dataProvider.hospitalsDao().getAll(), this);
+        hospitalAdapter = new HospitalAdapter(this, getDataProvider().hospitalsDao().getAll(), this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL));

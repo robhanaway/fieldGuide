@@ -37,7 +37,6 @@ public class MainActivity extends BaseActivity implements HomeFragment.OnItemSel
                     loadMedicine();
                     return true;
                 case R.id.navigation_settings:
-
                     return true;
             }
 
@@ -54,6 +53,17 @@ public class MainActivity extends BaseActivity implements HomeFragment.OnItemSel
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_settings:
+                startActivity(new Intent(this, SettingsActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -62,6 +72,8 @@ public class MainActivity extends BaseActivity implements HomeFragment.OnItemSel
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.navigation_home);
+
+
     }
 
 

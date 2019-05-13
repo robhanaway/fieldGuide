@@ -1,0 +1,19 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="updateNotificationSetting"
+        android:summary="Remind you to update app data"
+        android:title="Update Notification" />
+
+
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/appSettingsLanguageListArray"
+        android:entryValues="@array/appSettingsLanguageListValues"
+        android:key="clinicalLevel"
+        android:summary="Select the clinical level"
+        android:title="Clinical Level" />
+
+</PreferenceScreen>

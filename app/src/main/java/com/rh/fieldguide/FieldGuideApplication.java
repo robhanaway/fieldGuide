@@ -14,11 +14,15 @@ import com.rh.fieldguide.utils.logging.Logging;
 public class FieldGuideApplication extends Application {
     final static String TAG = FieldGuideApplication.class.getSimpleName();
     private Logging logging;
+    private SettingsProvider settingsProvider;
+    private DataProvider dataProvider;
     @Override
     public void onCreate() {
         super.onCreate();
         createObjects();
         logging.d(TAG, "onCreate");
+        settingsProvider = new SettingsProvider(this);
+        dataProvider = DataProvider.getDB(this);
 //        new csvExtract().run(this);
         sync();
 
@@ -42,5 +46,13 @@ public class FieldGuideApplication extends Application {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("medicines");
 
+    }
+
+    public SettingsProvider getSettingsProvider() {
+        return settingsProvider;
+    }
+
+    public DataProvider getDataProvider() {
+        return dataProvider;
     }
 }

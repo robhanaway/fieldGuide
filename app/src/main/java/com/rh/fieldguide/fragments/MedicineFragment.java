@@ -17,6 +17,8 @@ import com.rh.fieldguide.adapters.MedicineAdapter;
 import com.rh.fieldguide.data.DataProvider;
 import com.rh.fieldguide.data.primitives.MedicineDetails;
 
+import java.util.ArrayList;
+
 public class MedicineFragment extends BaseFragment implements MedicineAdapter.OnItemClickListener{
     final static String TAG = MedicineFragment.class.getSimpleName();
     RecyclerView recyclerView;
@@ -34,11 +36,19 @@ public class MedicineFragment extends BaseFragment implements MedicineAdapter.On
         recyclerView.setLayoutManager(new LinearLayoutManager(getParent().getApplicationContext()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(getParent(), LinearLayoutManager.VERTICAL));
-        medicineAdapter = new MedicineAdapter(getParent(), DataProvider.getDB(getApp()).medicineDetailsDao().getAll(), this);
+        medicineAdapter = new MedicineAdapter(getParent(),
+                new ArrayList<MedicineDetails>(), this);
 
         recyclerView.setAdapter(medicineAdapter);
         logging.d(TAG, "load");
     }
+
+    public void onResume() {
+        super.onResume();
+        medicineAdapter.setMedicineList(dataProvider.medicineDetailsDao().getByClinicalLevel(settingsProvider.getClinicalLevel()));
+//        medicineAdapter.setHasStableIds();
+    }
+
 
 
     @Override

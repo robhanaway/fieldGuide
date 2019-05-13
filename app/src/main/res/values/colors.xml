@@ -11,7 +11,7 @@
     <color name="HospitalHeaderColor">#000000</color>
     <color name="medicineTextColor">#000000</color>
     <color name="seperator">#400000FF</color>
-    <color name="home_buttons">#400000FF</color>
+    <color name="home_buttons">#800000FF</color>
 
     <color name="light_tint">#0D0000FF</color>
     <color name="transparent">#000000FF</color>
@@ -22,4 +22,7 @@
 
     <color name="CalculationBorderColor">#000000</color>
     <color name="CalculationBackgroundColor">#FFEB3B</color>
+
+    <color name="HomeButtonBorder">#6464FF</color>
+    <color name="HomeButtonFiller">#E6E6FF</color>
 </resources>
