@@ -6,13 +6,14 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:padding="5dp"
         android:textAppearance="@style/DosageHeaderStyle"
         android:id="@+id/medicine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <LinearLayout
-        android:weightSum="3"
+
         android:layout_below="@id/medicine"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -31,11 +32,12 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
                 <TextView
-
+                    android:textAppearance="@style/RouteStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Route"/>
                 <TextView
+                    android:textAppearance="@style/RouteStyle"
                     android:id="@+id/route"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -47,11 +49,13 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
                 <TextView
+                    android:textAppearance="@style/RouteStyle"
                     android:text="Concentration"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                    />
                 <TextView
+                    android:textAppearance="@style/RouteStyle"
                     android:id="@+id/concentration"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -78,7 +82,6 @@
                     android:text="Age"/>
                 <Spinner
 
-                    android:textAppearance="@style/CalculationSpinnerText"
                     android:spinnerMode="dialog"
                     android:id="@+id/age"
                     android:layout_width="match_parent"
@@ -108,55 +111,75 @@
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
+        <RelativeLayout
+
             android:id="@+id/calculation"
-            android:orientation="horizontal"
-            android:layout_weight="1"
-            android:weightSum="2"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="0dp"
+            android:layout_weight="1"
 
-
+            >
 
             <LinearLayout
-                android:layout_weight="1"
-                android:layout_width="0dp"
+                android:padding="10dp"
+                android:background="@drawable/calculation_result_background"
+                android:orientation="vertical"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-                <TextView
-                    android:textAppearance="@style/CalculationItem"
-                    android:textAlignment="textEnd"
-                    android:text="mg/g:"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:textStyle="bold"
-                    android:textAppearance="@style/CalculationItem"
-                    android:id="@+id/calculation_mg"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:textAppearance="@style/CalculationItem"
-                    android:textAlignment="textEnd"
-                    android:text="mL:"
+                <LinearLayout
 
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:textStyle="bold"
-                    android:id="@+id/calculation_ml"
-                    android:textAppearance="@style/CalculationItem"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="wrap_content"
+                    android:id="@+id/mg"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="mg/g:"
+                        android:textAppearance="@style/CalculationItem" />
+
+                    <TextView
+                        android:id="@+id/calculation_mg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:textAppearance="@style/CalculationItem"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:id="@+id/ml"
+
+
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_height="wrap_content"
+
+
+                        android:text="mL:"
+                        android:textAppearance="@style/CalculationItem" />
+
+                    <TextView
+                        android:id="@+id/calculation_ml"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:textAppearance="@style/CalculationItem"
+                        android:textStyle="bold" />
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+
+
+        </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>
