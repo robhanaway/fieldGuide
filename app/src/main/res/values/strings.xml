@@ -24,4 +24,8 @@
     <string name="synchronize_title">Synchronize</string>
     <string name="synchronize_syncing">Synchronizing…</string>
     <string name="synchronize_subtitle">Keep the application data up to date</string>
+
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

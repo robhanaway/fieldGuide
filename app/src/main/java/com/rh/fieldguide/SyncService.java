@@ -26,6 +26,7 @@ import java.text.SimpleDateFormat;
 public class SyncService extends IntentService {
     final static String TAG = SyncService.class.getSimpleName();
     final static String START = TAG + ".start";
+    final static String DELTA = TAG + ".delta";
 
     public final static String ACTION = TAG + "action";
     public final static String EXTRA_STAGE = TAG + "stage";
@@ -68,12 +69,20 @@ public class SyncService extends IntentService {
         context.startService(intent);
     }
 
+    public static void startSyncDelta(Context context) {
+        Intent intent = new Intent(context, SyncService.class);
+        intent.setAction(DELTA);
+        context.startService(intent);
+    }
+
     @Override
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
             final String action = intent.getAction();
             if (START.equals(action)) {
                 startSync();
+            } else if (DELTA.equals(action)) {
+                deltaSync();
             }
         }
     }
@@ -95,6 +104,7 @@ public class SyncService extends IntentService {
     ValueEventListener clinicAllLevelListener;
 
     private void sync(DataProvider dataProvider) {
+        broadcast("Starting", false);
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         medicine(dataProvider, firebaseDatabase);
 
@@ -528,5 +538,51 @@ public class SyncService extends IntentService {
 
     private synchronized void setSyncing(boolean syncing) {
         this.syncing = syncing;
+    }
+
+    ValueEventListener versionListener;
+    void deltaSync() {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+
+        final DatabaseReference reference = firebaseDatabase.getReference("version");
+        versionListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                checkAgainstConfig(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+        reference.addValueEventListener(versionListener);
+    }
+
+    void checkAgainstConfig(DataSnapshot dataSnapshot) {
+        DataSnapshot lastChild = null;
+        for (DataSnapshot child : dataSnapshot.getChildren()) {
+            lastChild = child;
+        }
+
+        if (lastChild != null) {
+            for (DataSnapshot valueIterator : lastChild.getChildren()) {
+                switch (valueIterator.getKey()) {
+                    case "version":
+                        checkAgainstVersion(Integer.parseInt(valueIterator.getValue().toString()));
+                        break;
+                }
+            }
+        }
+    }
+
+    void checkAgainstVersion(int remoteVersion) {
+        if (remoteVersion > settingsProvider.getDBVersion()) {
+            settingsProvider.setDBVersion(remoteVersion);
+            //Run the sync
+            startSync();
+        } else {
+            broadcast(null, true);
+        }
     }
 }

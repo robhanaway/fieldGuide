@@ -23,8 +23,7 @@ public class FieldGuideApplication extends Application {
         logging.d(TAG, "onCreate");
         settingsProvider = new SettingsProvider(this);
         dataProvider = DataProvider.getDB(this);
-//        new csvExtract().run(this);
-        sync();
+
 
     }
 
@@ -36,17 +35,6 @@ public class FieldGuideApplication extends Application {
         return logging;
     }
 
-    private void sync() {
-//        new LocalSyncProvider(this).sync(DataProvider.getDB(this));
-        new FirebaseSyncProvider().sync(DataProvider.getDB(this));
-    }
-
-
-    void fb() {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference("medicines");
-
-    }
 
     public SettingsProvider getSettingsProvider() {
         return settingsProvider;
