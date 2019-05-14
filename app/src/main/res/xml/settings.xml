@@ -16,4 +16,8 @@
         android:summary="Select the clinical level"
         android:title="Clinical Level" />
 
+    <Preference
+        android:key="sync"
+        android:title="@string/synchronize_title"
+        android:summary="@string/synchronize_subtitle"/>
 </PreferenceScreen>

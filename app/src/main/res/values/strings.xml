@@ -21,4 +21,7 @@
     <string name="menu_settings">Settings</string>
     <string name="calculate_dosage">Calculate Dosage</string>
     <string name="dosage_calculation"> - dosage calculation</string>
+    <string name="synchronize_title">Synchronize</string>
+    <string name="synchronize_syncing">Synchronizing…</string>
+    <string name="synchronize_subtitle">Keep the application data up to date</string>
 </resources>
