@@ -7,20 +7,23 @@ import android.support.v7.app.AppCompatActivity;
 import com.rh.fieldguide.FieldGuideApplication;
 
 import com.rh.fieldguide.SettingsProvider;
+import com.rh.fieldguide.analytics.AnalyticsProvider;
 import com.rh.fieldguide.data.DataProvider;
 import com.rh.fieldguide.utils.logging.Logging;
 
 public abstract class BaseActivity extends AppCompatActivity {
     public final static String EXTRA_ID = "id";
     protected Logging logging;
-    private DataProvider dataProvider;
-    private SettingsProvider settingsProvider;
+    protected DataProvider dataProvider;
+    protected SettingsProvider settingsProvider;
+    protected AnalyticsProvider analyticsProvider;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         logging = getApp().getLogging();
         dataProvider = getApp().getDataProvider();
         settingsProvider = getApp().getSettingsProvider();
+        analyticsProvider = getApp().getAnalyticsProvider();
     }
 
     public FieldGuideApplication getApp() {
@@ -48,5 +51,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public DataProvider getDataProvider() {
         return dataProvider;
+    }
+
+    public AnalyticsProvider getAnalyticsProvider() {
+        return analyticsProvider;
     }
 }

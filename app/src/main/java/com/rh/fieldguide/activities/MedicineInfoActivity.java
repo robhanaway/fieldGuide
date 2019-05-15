@@ -123,7 +123,7 @@ public class MedicineInfoActivity extends BaseActivity {
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             mode.setTitle(medicineDetails.getMedicinename());
-
+            analyticsProvider.logMedicationViewed(medicineDetails.getMedicinename());
 
             return true;
         }

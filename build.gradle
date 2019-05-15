@@ -3,6 +3,7 @@
 ext.RoomImplementationVersion = '1.0.0'
 ext.RoomPersistenceAnnotationProcessorVersion = '1.0.0'
 ext.GsonVersion = '2.8.0'
+ext.firebasePerformanceVersion = '17.0.0'
 buildscript {
     repositories {
         google()

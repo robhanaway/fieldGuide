@@ -6,11 +6,23 @@ public class SettingsProvider {
     public static final String CLINICAL_LEVEL = "clinicalLevel";
     public static final String SETTINGS_PREFERENCE = "settingsPreference";
     public static final String DB_VERSION = "dbVersion";
+    public static final String MAIN_HINT_SHOWN = "mainHintShown";
     final Context context;
 
 
     public SettingsProvider(Context context) {
         this.context = context;
+    }
+
+    public void setMainHintShown(boolean value) {
+        context.getSharedPreferences(SETTINGS_PREFERENCE, Context.MODE_PRIVATE)
+                .edit().putBoolean(MAIN_HINT_SHOWN,value).apply();
+    }
+
+
+    public boolean isMainHintShown() {
+        return  context.getSharedPreferences(SETTINGS_PREFERENCE, Context.MODE_PRIVATE)
+                .getBoolean(MAIN_HINT_SHOWN,false);
     }
 
     public int getDBVersion() {

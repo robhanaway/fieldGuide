@@ -3,7 +3,7 @@
     package="com.rh.fieldguide">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
-
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:name=".FieldGuideApplication"
         android:allowBackup="true"
@@ -65,6 +65,11 @@
             android:name=".activities.SettingsActivity"
             android:exported="false"
             android:theme="@style/AppTheme" />
+
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="c69d1afd823eeaaa55dbbed71a28e4e285ed18bd" />
     </application>
 
 </manifest>

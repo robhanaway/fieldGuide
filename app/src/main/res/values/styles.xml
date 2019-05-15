@@ -106,4 +106,18 @@
     <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
         <item name="android:background">@color/black_overlay</item>
     </style>
+
+    <style name="SplashAppNameStyle" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">24sp</item>
+
+        <item name="android:textColor">@color/SplashAppNameColor</item>
+        <item name="android:typeface">normal</item>
+    </style>
+
+    <style name="SplashProgressStyle" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">18sp</item>
+
+        <item name="android:textColor">@color/SplashAppNameColor</item>
+        <item name="android:typeface">normal</item>
+    </style>
 </resources>

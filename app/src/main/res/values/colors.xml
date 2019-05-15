@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#008577</color>
+    <color name="colorSplash">#800000FF</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorMedicine">#2196F3</color>
@@ -27,4 +28,7 @@
     <color name="HomeButtonFiller">#E6E6FF</color>
 
     <color name="black_overlay">#66000000</color>
+
+    <color name="SplashAppNameColor">#E6FFFFFF</color>
+    <color name="start_hint_header">#6464FF</color>
 </resources>
