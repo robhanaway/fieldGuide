@@ -10,4 +10,5 @@ public class AnalyticsProvider {
     public void logMedicationViewed(String name) {
         Answers.getInstance().logCustom(new CustomEvent(MEDICATION_VIEWED).putCustomAttribute(NAME,name));
     }
+
 }

@@ -3,6 +3,8 @@ package com.rh.fieldguide;
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.v4.content.LocalBroadcastManager;
 
@@ -88,10 +90,12 @@ public class SyncService extends IntentService {
     }
 
     void startSync() {
-        logging.d(TAG, "startSync");
-        if (!isSyncing()) {
-            setSyncing(true);
-            sync(dataProvider);
+        if (checkConnection()) {
+            logging.d(TAG, "startSync");
+            if (!isSyncing()) {
+                setSyncing(true);
+                sync(dataProvider);
+            }
         }
     }
 
@@ -542,23 +546,38 @@ public class SyncService extends IntentService {
 
     ValueEventListener versionListener;
     void deltaSync() {
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        if (checkConnection()) {
+            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
 
-        final DatabaseReference reference = firebaseDatabase.getReference("version");
-        versionListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                checkAgainstConfig(dataSnapshot);
-            }
+            final DatabaseReference reference = firebaseDatabase.getReference("version");
+            versionListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    checkAgainstConfig(dataSnapshot);
+                }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        };
-        reference.addValueEventListener(versionListener);
+                }
+            };
+            reference.addValueEventListener(versionListener);
+        }
     }
 
+    boolean checkConnection() {
+        boolean connected = false;
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager == null ? null : connectivityManager.getActiveNetworkInfo();
+        if (networkInfo != null) {
+            connected = networkInfo.isConnected();
+        }
+
+        if (!connected) {
+            broadcast(null, true);
+        }
+        return connected;
+    }
     void checkAgainstConfig(DataSnapshot dataSnapshot) {
         DataSnapshot lastChild = null;
         for (DataSnapshot child : dataSnapshot.getChildren()) {
