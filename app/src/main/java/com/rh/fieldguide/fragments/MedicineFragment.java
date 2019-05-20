@@ -6,6 +6,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ public class MedicineFragment extends BaseFragment implements MedicineAdapter.On
     final static String TAG = MedicineFragment.class.getSimpleName();
     RecyclerView recyclerView;
     MedicineAdapter medicineAdapter;
+    String searchText;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,11 +47,22 @@ public class MedicineFragment extends BaseFragment implements MedicineAdapter.On
 
     public void onResume() {
         super.onResume();
-        medicineAdapter.setMedicineList(dataProvider.medicineDetailsDao().getByClinicalLevel(settingsProvider.getClinicalLevel()));
-//        medicineAdapter.setHasStableIds();
+        reload();
+
     }
 
 
+    void reload() {
+        if (TextUtils.isEmpty(searchText)) {
+            medicineAdapter.setMedicineList(dataProvider.medicineDetailsDao().getByClinicalLevel(settingsProvider.getClinicalLevel()));
+        } else {
+            medicineAdapter.setMedicineList(dataProvider.medicineDetailsDao().search(settingsProvider.getClinicalLevel(),"%" + searchText + "%"));
+        }
+    }
+    public void search(String text) {
+        searchText = text;
+        reload();
+    }
 
     @Override
     public void onItemClicked(MedicineDetails medicineDetails) {

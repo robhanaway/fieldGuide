@@ -5,7 +5,10 @@
     <color name="colorPrimaryDark">#FF9800</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorMedicine">#2196F3</color>
-    <color name="medicineNameColor">#673AB7</color>
+    <color name="medicineNameColor">#323232</color>
+
+
+    <color name="medicineWorColor">#323232</color>
 
     <color name="PhoneDetai">#008000</color>
     <color name="HospitalNameColor">#673AB7</color>
@@ -30,5 +33,5 @@
     <color name="black_overlay">#66000000</color>
 
     <color name="SplashAppNameColor">#E6FFFFFF</color>
-    <color name="start_hint_header">#6464FF</color>
+    <color name="start_hint_header">#FF9800</color>
 </resources>

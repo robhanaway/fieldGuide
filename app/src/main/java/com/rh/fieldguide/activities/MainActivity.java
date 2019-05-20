@@ -1,5 +1,7 @@
 package com.rh.fieldguide.activities;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,9 +10,12 @@ import android.support.design.widget.BottomNavigationView;
 
 
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.SearchView;
 
 import com.rh.fieldguide.R;
 import com.rh.fieldguide.fragments.BaseFragment;
@@ -20,8 +25,10 @@ import com.rh.fieldguide.fragments.MedicineFragment;
 
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
-public class MainActivity extends BaseActivity implements HomeFragment.OnItemSelectedListener{
+import static android.content.Intent.ACTION_SEARCH;
 
+public class MainActivity extends BaseActivity implements HomeFragment.OnItemSelectedListener, MaterialTapTargetPrompt.OnHidePromptListener{
+    SearchView searchView;
     BaseFragment currentFragment;
     View container;
     BottomNavigationView navigation;
@@ -46,9 +53,42 @@ public class MainActivity extends BaseActivity implements HomeFragment.OnItemSel
     };
 
     @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (ACTION_SEARCH.equals(intent.getAction())) {
+            String searchText = intent.getStringExtra(SearchManager.QUERY);
+            search(searchText);
+        }
+    }
+
+
+    void search(String searchText) {
+        if (currentFragment instanceof MedicineFragment) {
+            MedicineFragment.class.cast(currentFragment).search(searchText);
+        }
+    }
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.main, menu);
+
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+
+        searchView =
+                (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                search(null);
+                return false;
+            }
+        });
+
+
         return true;
     }
 
@@ -103,6 +143,7 @@ public class MainActivity extends BaseActivity implements HomeFragment.OnItemSel
                 .setPrimaryText(R.string.start_hint_header)
                 .setSecondaryText(R.string.start_hint_content)
                 .setBackgroundColourFromRes(R.color.start_hint_header)
+                .setOnHidePromptListener(this)
                 .show();
     }
 
@@ -145,5 +186,21 @@ public class MainActivity extends BaseActivity implements HomeFragment.OnItemSel
     @Override
     public void onMedications() {
         navigation.setSelectedItemId(R.id.navigation_medicication);
+    }
+
+    @Override
+    public void onHidePrompt(MotionEvent event, boolean tappedTarget) {
+
+    }
+
+    @Override
+    public void onHidePromptComplete() {
+
+        new MaterialTapTargetPrompt.Builder(this)
+                .setTarget(findViewById(R.id.nav_settings))
+                .setPrimaryText(R.string.start_hint_header)
+                .setSecondaryText(R.string.start_hint_search_content)
+                .setBackgroundColourFromRes(R.color.start_hint_header)
+                .show();
     }
 }

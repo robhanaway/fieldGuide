@@ -19,9 +19,12 @@ public interface MedicineDetailsDao {
     @Query("SELECT * FROM medicinedetails ORDER by medicinename ASC")
     List<MedicineDetails> getAll();
 
-    @Query("select * from medicinedetails where mdcid in (select distinct medicinedetailid from medicineclinic where clinicallevelid = :clinicalLevel)  ORDER by medicinename ASC")
+    @Query("select * from medicinedetails where mdcid in (select distinct medicinedetailid from medicineclinic where clinicallevelid = :clinicalLevel) ORDER by medicinename ASC")
     List<MedicineDetails> getByClinicalLevel(int clinicalLevel);
 
     @Query("SELECT * FROM medicinedetails WHERE _id = :id")
     List<MedicineDetails> getById(int id);
+
+    @Query("select * from medicinedetails where mdcid in (select distinct medicinedetailid from medicineclinic where clinicallevelid = :clinicalLevel) AND  medicinename COLLATE UTF8_GENERAL_CI LIKE :searchTerm ORDER by medicinename ASC")
+    List<MedicineDetails> search(int clinicalLevel, String searchTerm);
 }

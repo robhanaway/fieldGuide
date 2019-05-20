@@ -11,7 +11,7 @@
         android:paddingTop="2dp"
         android:layout_below="@+id/name"
         android:id="@+id/indications"
-        android:textAppearance="@style/indicationStyle"
+        android:textAppearance="@style/medicineRowStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </RelativeLayout>
