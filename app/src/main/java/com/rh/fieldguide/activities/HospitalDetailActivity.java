@@ -24,7 +24,7 @@ public class HospitalDetailActivity extends BaseActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hospital_detail);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (getIntent() != null) {
             int id = getIntent().getIntExtra(EXTRA_ID,-1);
             if (id != -1) {
@@ -37,7 +37,7 @@ public class HospitalDetailActivity extends BaseActivity implements View.OnClick
         }
 
         actionModeCallback = new ActionModeCallback();
-        currentActionMode = startActionMode(actionModeCallback);
+//        currentActionMode = startActionMode(actionModeCallback);
     }
 
 
@@ -62,6 +62,7 @@ public class HospitalDetailActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
+
         String number = v instanceof TextView ? TextView.class.cast(v).getText().toString() : null;
         if (number != null) {
             Intent callIntent = new Intent(Intent.ACTION_CALL);
@@ -103,5 +104,15 @@ public class HospitalDetailActivity extends BaseActivity implements View.OnClick
             finish();
 
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

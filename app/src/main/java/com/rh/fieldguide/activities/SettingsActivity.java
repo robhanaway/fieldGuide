@@ -16,11 +16,12 @@ public class SettingsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         // Display the fragment as the main content.
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new SettingsFragment())
                 .commit();
         actionModeCallback = new ActionModeCallback();
-        currentActionMode = startActionMode(actionModeCallback);
+//        currentActionMode = startActionMode(actionModeCallback);
     }
 
     private class ActionModeCallback implements ActionMode.Callback {
@@ -51,5 +52,15 @@ public class SettingsActivity extends BaseActivity {
             finish();
 
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

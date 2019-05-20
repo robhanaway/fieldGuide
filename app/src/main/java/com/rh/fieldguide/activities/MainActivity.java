@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.rh.fieldguide.R;
-import com.rh.fieldguide.SyncService;
 import com.rh.fieldguide.fragments.BaseFragment;
 import com.rh.fieldguide.fragments.HomeFragment;
 import com.rh.fieldguide.fragments.HospitalFragment;
@@ -57,6 +56,7 @@ public class MainActivity extends BaseActivity implements HomeFragment.OnItemSel
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_settings:
+
                 startActivity(new Intent(this, SettingsActivity.class));
                 return true;
             default:
@@ -68,6 +68,7 @@ public class MainActivity extends BaseActivity implements HomeFragment.OnItemSel
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         container = findViewById(R.id.fragment_container);
 
         navigation = findViewById(R.id.navigation);

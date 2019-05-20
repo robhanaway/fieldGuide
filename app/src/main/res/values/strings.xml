@@ -31,4 +31,5 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="start_hint_header">Welcome</string>
     <string name="start_hint_content">You can change your settings\nanytime by clicking here.</string>
+    <string name="search_title">Search</string>
 </resources>

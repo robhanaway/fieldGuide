@@ -40,8 +40,10 @@ public class MedicineInfoActivity extends BaseActivity {
         }
 
         actionModeCallback = new ActionModeCallback();
-        currentActionMode = startActionMode(actionModeCallback);
+//        currentActionMode = startActionMode(actionModeCallback);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
 
     TextView indecations;
     TextView adultDose;
@@ -147,5 +149,15 @@ public class MedicineInfoActivity extends BaseActivity {
             finish();
 
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

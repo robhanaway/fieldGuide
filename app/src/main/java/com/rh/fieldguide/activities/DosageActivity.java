@@ -25,8 +25,9 @@ public class DosageActivity extends BaseActivity {
         setContentView(R.layout.activity_dosage);
 
         actionModeCallback = new ActionModeCallback();
-        currentActionMode = startActionMode(actionModeCallback);
+//        currentActionMode = startActionMode(actionModeCallback);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (getIntent() != null) {
             int id = getIntent().getIntExtra(EXTRA_ID,-1);
             if (id != -1) {
@@ -74,5 +75,15 @@ public class DosageActivity extends BaseActivity {
             finish();
 
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

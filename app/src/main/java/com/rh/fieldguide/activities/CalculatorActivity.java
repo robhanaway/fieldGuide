@@ -30,9 +30,9 @@ public class CalculatorActivity extends BaseActivity implements AdapterView.OnIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         actionModeCallback = new ActionModeCallback();
-        currentActionMode = startActionMode(actionModeCallback);
+//        currentActionMode = startActionMode(actionModeCallback);
         //Todo: get dosage index
         if (getIntent() != null) {
             int id = getIntent().getIntExtra(EXTRA_ID,-1);
@@ -200,5 +200,15 @@ public class CalculatorActivity extends BaseActivity implements AdapterView.OnIt
             finish();
 
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
