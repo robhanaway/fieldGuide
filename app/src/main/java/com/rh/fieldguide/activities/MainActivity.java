@@ -1,10 +1,12 @@
 package com.rh.fieldguide.activities;
 
 import android.app.SearchManager;
+import android.app.SearchableInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.SearchRecentSuggestions;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 
@@ -22,6 +24,7 @@ import com.rh.fieldguide.fragments.BaseFragment;
 import com.rh.fieldguide.fragments.HomeFragment;
 import com.rh.fieldguide.fragments.HospitalFragment;
 import com.rh.fieldguide.fragments.MedicineFragment;
+import com.rh.fieldguide.search.SearchSuggestionProvider;
 
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
@@ -57,6 +60,8 @@ public class MainActivity extends BaseActivity implements HomeFragment.OnItemSel
         super.onNewIntent(intent);
         if (ACTION_SEARCH.equals(intent.getAction())) {
             String searchText = intent.getStringExtra(SearchManager.QUERY);
+            SearchRecentSuggestions searchRecentSuggestions = new SearchRecentSuggestions(this, SearchSuggestionProvider.AUTHORITY, SearchSuggestionProvider.MODE);
+            searchRecentSuggestions.saveRecentQuery(searchText, null);
             search(searchText);
         }
     }
@@ -78,8 +83,11 @@ public class MainActivity extends BaseActivity implements HomeFragment.OnItemSel
 
         searchView =
                 (SearchView) menu.findItem(R.id.search).getActionView();
+
+
         searchView.setSearchableInfo(
                 searchManager.getSearchableInfo(getComponentName()));
+
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
@@ -196,11 +204,11 @@ public class MainActivity extends BaseActivity implements HomeFragment.OnItemSel
     @Override
     public void onHidePromptComplete() {
 
-        new MaterialTapTargetPrompt.Builder(this)
-                .setTarget(findViewById(R.id.nav_settings))
-                .setPrimaryText(R.string.start_hint_header)
-                .setSecondaryText(R.string.start_hint_search_content)
-                .setBackgroundColourFromRes(R.color.start_hint_header)
-                .show();
+//        new MaterialTapTargetPrompt.Builder(this)
+//                .setTarget(findViewById(R.id.nav_settings))
+//                .setPrimaryText(R.string.start_hint_header)
+//                .setSecondaryText(R.string.start_hint_search_content)
+//                .setBackgroundColourFromRes(R.color.start_hint_header)
+//                .show();
     }
 }
