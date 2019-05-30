@@ -12,4 +12,7 @@
         android:key="sync"
         android:title="@string/synchronize_title"
         android:summary="@string/synchronize_subtitle"/>
+    <Preference
+        android:key="disclaimer"
+        android:title="@string/disclaimer_title"/>
 </PreferenceScreen>

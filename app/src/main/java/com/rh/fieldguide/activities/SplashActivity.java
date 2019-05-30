@@ -47,7 +47,9 @@ public class SplashActivity extends BaseActivity {
         if (!complete) {
             sync.setText("Syncing : " + intent.getStringExtra(SyncService.EXTRA_STAGE));
         } else {
-            startActivity(new Intent(getApp(), MainActivity.class));
+            startActivity(new Intent(getApp(),
+                    settingsProvider.isDisclaimerShown() ?
+                            MainActivity.class : DisclaimerActivity.class));
         }
     }
 

@@ -7,11 +7,23 @@ public class SettingsProvider {
     public static final String SETTINGS_PREFERENCE = "settingsPreference";
     public static final String DB_VERSION = "dbVersion";
     public static final String MAIN_HINT_SHOWN = "mainHintShown";
+    public static final String DISCLAIMER_SHOWN = "disclaimerShown";
     final Context context;
 
 
     public SettingsProvider(Context context) {
         this.context = context;
+    }
+
+    public void setDisclaimerShown(boolean value) {
+        context.getSharedPreferences(SETTINGS_PREFERENCE, Context.MODE_PRIVATE)
+                .edit().putBoolean(DISCLAIMER_SHOWN,value).apply();
+    }
+
+
+    public boolean isDisclaimerShown() {
+        return  context.getSharedPreferences(SETTINGS_PREFERENCE, Context.MODE_PRIVATE)
+                .getBoolean(DISCLAIMER_SHOWN,false);
     }
 
     public void setMainHintShown(boolean value) {

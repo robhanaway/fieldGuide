@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Dosage calculation</string>
+    <string name="app_name">Dosac</string>
     <string name="title_home">Home</string>
     <string name="title_guidelines">Guidelines</string>
     <string name="title_medicine">Medication</string>
@@ -34,4 +34,7 @@
     <string name="start_hint_search_content">Medicines can be found quickly\nby clicking here</string>
     <string name="search_title">Search</string>
     <string name="search_hint">Enter search text</string>
+    <string name="disclaimer_text">This app is for 2014 CPGs only.\n\nThese guidelines were taken from the PHECC website (www.phecit.ie).</string>
+    <string name="disclaimer_button_text">Acknowledge</string>
+    <string name="disclaimer_title">Disclaimer</string>
 </resources>

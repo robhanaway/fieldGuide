@@ -13,6 +13,7 @@
     <color name="PhoneDetai">#008000</color>
     <color name="HospitalNameColor">#673AB7</color>
     <color name="HospitalHeaderColor">#000000</color>
+    <color name="DisclaimerColor">#E10000</color>
     <color name="medicineTextColor">#000000</color>
     <color name="seperator">#400000FF</color>
     <color name="home_buttons">#800000FF</color>

@@ -124,6 +124,7 @@ public class MainActivity extends BaseActivity implements HomeFragment.OnItemSel
         navigation.setSelectedItemId(R.id.navigation_medicication);
 
 
+        navigation.setVisibility(View.GONE);
     }
 
     Handler handler = new Handler();

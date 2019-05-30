@@ -13,6 +13,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import com.rh.fieldguide.FieldGuideApplication;
 import com.rh.fieldguide.R;
 import com.rh.fieldguide.SyncService;
+import com.rh.fieldguide.activities.DisclaimerActivity;
 import com.rh.fieldguide.data.DataProvider;
 import com.rh.fieldguide.data.primitives.ClinicalAllLevel;
 
@@ -24,6 +25,7 @@ public class SettingsFragment extends PreferenceFragment implements
     FieldGuideApplication fieldGuideApplication;
     boolean canSync = true;
     Preference sync;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,13 @@ public class SettingsFragment extends PreferenceFragment implements
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 runSync();
+                return false;
+            }
+        });
+        getPreferenceScreen().findPreference("disclaimer").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                DisclaimerActivity.launch(getActivity(), true);
                 return false;
             }
         });
